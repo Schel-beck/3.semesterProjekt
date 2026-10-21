@@ -15,4 +15,9 @@ public class ApiException extends RuntimeException {
     public int getCode(){
         return code;
     }
+    public ApiException(int code, String msg, Throwable cause) {
+        super(msg, cause);
+        this.code = code;
+        logger.error("ApiException (code={}): {}", code, msg, cause);
+    }
 }
