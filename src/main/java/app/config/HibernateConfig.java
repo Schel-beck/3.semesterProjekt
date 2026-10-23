@@ -1,3 +1,4 @@
+
 package app.config;
 
 import app.utils.Utils;
@@ -25,22 +26,37 @@ public final class HibernateConfig {
     private static Properties buildProps() {
         Properties props = HibernateBaseProperties.createBase();
 
-        // Teaching-friendly default - change to update in production
-        props.put("hibernate.hbm2ddl.auto", "create");
-
         if (System.getenv("DEPLOYED") != null) {
             setDeployedProperties(props);
         } else {
             setDevProperties(props);
         }
+
         return props;
     }
 
     private static void setDeployedProperties(Properties props) {
         String dbName = System.getenv("DB_NAME");
-        props.setProperty("hibernate.connection.url", System.getenv("CONNECTION_STR") + dbName);
-        props.setProperty("hibernate.connection.username", System.getenv("DB_USERNAME"));
-        props.setProperty("hibernate.connection.password", System.getenv("DB_PASSWORD"));
+        String connectionStr = System.getenv("CONNECTION_STR");
+        String username = System.getenv("DB_USERNAME");
+        String password = System.getenv("DB_PASSWORD");
+
+        if (dbName == null || connectionStr == null
+                || username == null || password == null) {
+            throw new IllegalStateException(
+                    "Missing required database environment variables"
+            );
+        }
+
+        props.setProperty(
+                "hibernate.connection.url",
+                connectionStr + dbName
+        );
+        props.setProperty("hibernate.connection.username", username);
+        props.setProperty("hibernate.connection.password", password);
+
+        // Avoid recreating the schema on application startup.
+        props.setProperty("hibernate.hbm2ddl.auto", "update");
     }
 
     private static void setDevProperties(Properties props) {
@@ -48,8 +64,11 @@ public final class HibernateConfig {
         String username = Utils.getPropertyValue("DB_USERNAME", "config.properties");
         String password = Utils.getPropertyValue("DB_PASSWORD", "config.properties");
 
-        props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/" + dbName);
-        props.put("hibernate.connection.username", username);
-        props.put("hibernate.connection.password", password);
+        props.setProperty(
+                "hibernate.connection.url",
+                "jdbc:postgresql://localhost:5432/" + dbName
+        );
+        props.setProperty("hibernate.connection.username", username);
+        props.setProperty("hibernate.connection.password", password);
     }
 }
