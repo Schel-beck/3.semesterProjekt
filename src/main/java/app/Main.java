@@ -20,7 +20,7 @@ public class Main {
         SubjectController subjectController = new SubjectController(emf);
         QuestionController questionController = new QuestionController(emf);
         SubjectRoute subjectRoute = new SubjectRoute(subjectController);
-        SecurityRoutes securityRoutes = new SecurityRoutes();
+        SecurityRoutes securityRoutes = new SecurityRoutes(emf);
         QuestionRoute questionRoute = new QuestionRoute(questionController);
         InteractiveChatRoute interactiveChatRoute = new InteractiveChatRoute();
         User_questionRoutes userQuestionRoutes = new User_questionRoutes();
