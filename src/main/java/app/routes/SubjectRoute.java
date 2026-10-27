@@ -11,10 +11,8 @@ import lombok.NoArgsConstructor;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 import static io.javalin.apibuilder.ApiBuilder.delete;
-@NoArgsConstructor
 public class SubjectRoute {
-    EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-    private SubjectController subjectController = new SubjectController(emf);
+    private final SubjectController subjectController;
 
     public EndpointGroup getRoutes() {
 
