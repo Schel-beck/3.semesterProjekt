@@ -31,10 +31,15 @@ import java.util.stream.Collectors;
 
 
 public class SecurityController implements ISecurityController {
-    EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-    ObjectMapper objectMapper = new ObjectMapper();
-    ITokenSecurity tokenSecurity = new TokenSecurity();
-    SecurityDAO securityDAO = new SecurityDAO(emf);
+    private final EntityManagerFactory emf;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ITokenSecurity tokenSecurity = new TokenSecurity();
+    private final SecurityDAO securityDAO;
+
+    public SecurityController(EntityManagerFactory emf) {
+        this.emf = emf;
+        this.securityDAO = new SecurityDAO(emf);
+    }
     private static final Logger log = LoggerFactory.getLogger(SecurityController.class);
 
     /**
