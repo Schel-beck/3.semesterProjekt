@@ -51,14 +51,17 @@ public class User_questionDAO implements IDAO<User_question, Integer>{
 
     @Override
     public void delete(Integer id) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        User_question obj = em.find(User_question.class, id);
-        if (obj != null)
-        {
-            em.remove(obj);
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            try {
+                em.createQuery("DELETE FROM User_question e WHERE e.id = :id")
+                    .setParameter("id", id)
+                    .executeUpdate();
+                em.getTransaction().commit();
+            } catch (RuntimeException e) {
+                if (em.getTransaction().isActive()) em.getTransaction().rollback();
+                throw e;
+            }
         }
-        em.getTransaction().commit();
-        em.close();
     }
 }
