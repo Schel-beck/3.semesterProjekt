@@ -4,7 +4,6 @@ import app.config.HibernateTestConfig;
 import app.security.entities.Role;
 import app.testUtils.Populator;
 import jakarta.persistence.EntityManagerFactory;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -26,11 +25,6 @@ class RoleDAOTest {
     void beforeEach() {
         seeded = Populator.rolePopulate(emf);
         roleDAO = new RoleDAO(emf);
-    }
-
-    @AfterAll
-    void shutdown() {
-        emf.close();
     }
 
     @Test
