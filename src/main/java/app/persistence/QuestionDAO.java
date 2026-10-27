@@ -52,15 +52,18 @@ public class QuestionDAO implements IDAO<Question,Integer>{
 
     @Override
     public void delete(Integer id) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Question obj = em.find(Question.class, id);
-        if (obj != null)
-        {
-            em.remove(obj);
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            try {
+                em.createQuery("DELETE FROM Question e WHERE e.id = :id")
+                    .setParameter("id", id)
+                    .executeUpdate();
+                em.getTransaction().commit();
+            } catch (RuntimeException e) {
+                if (em.getTransaction().isActive()) em.getTransaction().rollback();
+                throw e;
+            }
         }
-        em.getTransaction().commit();
-        em.close();
     }
     public List<Question> readAllFromOneSubject(int subjectId) {
         EntityManager em = emf.createEntityManager();
