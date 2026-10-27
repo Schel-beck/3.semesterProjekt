@@ -23,7 +23,7 @@ public class Main {
         SecurityRoutes securityRoutes = new SecurityRoutes(emf);
         QuestionRoute questionRoute = new QuestionRoute(questionController);
         InteractiveChatRoute interactiveChatRoute = new InteractiveChatRoute();
-        User_questionRoutes userQuestionRoutes = new User_questionRoutes();
+        User_questionRoutes userQuestionRoutes = new User_questionRoutes(emf);
         NotificationRoute notificationRoute = new NotificationRoute(new NotificationController());
         Routes routes = new Routes(
                 subjectRoute,
