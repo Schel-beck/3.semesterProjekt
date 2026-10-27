@@ -115,7 +115,7 @@ class QuestionRouteTest {
             .contentType("application/json")
             .body("""
                     {
-                        "question": "What is an integer in Java?"                  
+                        "name": "What is an integer in Java?"                  
                     }
                     """)
             .when()
@@ -123,7 +123,7 @@ class QuestionRouteTest {
             .then()
             .log().all()
             .statusCode(201)
-            .body("question",
+            .body("name",
                 is("What is an integer in Java?"));
     }
 
@@ -138,7 +138,7 @@ class QuestionRouteTest {
             .contentType("application/json")
             .body("""
                     {
-                        "question": "Who was the first king of Denmark?"
+                        "name": "Who was the first king of Denmark?"
                     }
                     """)
             .when()
@@ -157,7 +157,7 @@ class QuestionRouteTest {
             .contentType("application/json")
             .body("""
                     {
-                        "question": "New question"
+                        "name": "New question"
                     }
                     """)
             .when()
