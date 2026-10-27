@@ -1,6 +1,7 @@
 package app.security.routes;
 
 import app.security.controllers.SecurityController;
+import jakarta.persistence.EntityManagerFactory;
 import app.security.enums.Role;
 import app.utils.Utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,7 +15,11 @@ import static io.javalin.apibuilder.ApiBuilder.post;
 
 public class SecurityRoutes {
     private static ObjectMapper jsonMapper = new ObjectMapper();
-    private static SecurityController securityController = new SecurityController();
+    private final SecurityController securityController;
+
+    public SecurityRoutes(EntityManagerFactory emf) {
+        this.securityController = new SecurityController(emf);
+    }
     public  EndpointGroup getSecurityRoutes() {
         return ()->{
             path("/auth", ()->{
