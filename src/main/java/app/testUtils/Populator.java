@@ -223,7 +223,7 @@ public class Populator {
 
             try {
                 em.createNativeQuery(
-                        "TRUNCATE TABLE user_role RESTART IDENTITY CASCADE"
+                        "TRUNCATE TABLE user_roles RESTART IDENTITY CASCADE"
                 ).executeUpdate();
 
                 em.createNativeQuery(
