@@ -26,7 +26,7 @@ public class ApplicationConfig {
                 new QuestionRoute(questionController),
                 securityRoutes,
                 new InteractiveChatRoute(),
-                new User_questionRoutes(),
+                new User_questionRoutes(emf),
                 new NotificationRoute(notificationController));
 
         Javalin app = Javalin.create(config -> {

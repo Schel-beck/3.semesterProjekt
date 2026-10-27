@@ -11,8 +11,11 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 import static io.javalin.apibuilder.ApiBuilder.delete;
 
 public class User_questionRoutes {
-    EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-    User_questionController controller = new User_questionController(emf);
+    private final User_questionController controller;
+
+    public User_questionRoutes(EntityManagerFactory emf) {
+        this.controller = new User_questionController(emf);
+    }
 
     public EndpointGroup getRoutes() {
         return () -> {
