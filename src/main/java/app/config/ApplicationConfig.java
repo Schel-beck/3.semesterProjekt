@@ -17,14 +17,14 @@ public class ApplicationConfig {
 
         QuestionController questionController = new QuestionController(emf);
         SubjectController subjectController = new SubjectController(emf);
-        SecurityRoutes securityRoutes = new SecurityRoutes();
+        SecurityRoutes securityRoutes = new SecurityRoutes(emf);
         NotificationController notificationController = new NotificationController();
 
 
         Routes routes = new Routes(
                 new SubjectRoute(subjectController),
                 new QuestionRoute(questionController),
-                new SecurityRoutes(),
+                securityRoutes,
                 new InteractiveChatRoute(),
                 new User_questionRoutes(),
                 new NotificationRoute(notificationController));

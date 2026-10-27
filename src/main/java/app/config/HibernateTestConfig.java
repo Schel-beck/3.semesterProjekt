@@ -11,14 +11,12 @@ public final class HibernateTestConfig {
     private HibernateTestConfig() {}
 
     public static EntityManagerFactory getEntityManagerFactory() {
-        if (emf == null) {
-            synchronized (HibernateTestConfig.class) {
-                if (emf == null) {
-                    emf = HibernateEmfBuilder.build(buildProps());
-                }
+        synchronized (HibernateTestConfig.class) {
+            if (emf == null || !emf.isOpen()) {
+                emf = HibernateEmfBuilder.build(buildProps());
             }
+            return emf;
         }
-        return emf;
     }
 
     private static Properties buildProps() {

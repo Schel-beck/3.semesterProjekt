@@ -4,7 +4,6 @@ import app.testUtils.Populator;
 import app.config.HibernateTestConfig;
 import app.security.entities.User;
 import jakarta.persistence.EntityManagerFactory;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -25,11 +24,6 @@ class UserDAOTest {
 
         seeded = Populator.userPopulate(emf);
         userDAO = new UserDAO(emf);
-    }
-
-    @AfterAll
-    void shutdown() {
-        emf.close();
     }
     @Test
     void create() {
