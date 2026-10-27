@@ -33,7 +33,7 @@ public class ApplicationConfig {
                 new NotificationRoute(notificationController));
 
         Javalin app = Javalin.create(config -> {
-            config.jsonMapper(new JavalinJackson(new ObjectMapper().registerModule(new JavaTimeModule())));
+            config.jsonMapper(new JavalinJackson(new ObjectMapper().registerModule(new JavaTimeModule()), false));
             config.routes.apiBuilder(routes.getRoutes());
             config.bundledPlugins.enableRouteOverview("/routes");
         });
