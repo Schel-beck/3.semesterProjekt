@@ -4,7 +4,6 @@ import app.config.HibernateTestConfig;
 import app.entities.Subject;
 import app.entities.Question;
 import jakarta.persistence.EntityManagerFactory;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -27,11 +26,6 @@ class QuestionDAOTest {
         Subject subject = subjects.get("subject1");
         seeded = Populator.questionPopulate(emf);
         questionDAO = new QuestionDAO(emf);
-    }
-
-    @AfterAll
-    void shutdown() {
-        emf.close();
     }
 
     @Test
