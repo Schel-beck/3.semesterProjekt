@@ -1,6 +1,6 @@
 # Deploying 3.semesterProjekt to DigitalOcean
 
-This project builds and publishes `rav3n2594/hotel_api:latest` using GitHub Actions when changes are pushed to `master`. The Java API listens on port 7070.
+This project builds and publishes `rav3n2594/coding-learning-platform:latest` using GitHub Actions when changes are pushed to `master`. The Java API listens on port 7070.
 
 ## Before editing your Droplet
 
