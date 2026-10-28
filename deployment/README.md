@@ -64,3 +64,4 @@ If the database does not exist, confirm the correct name and create only the req
 - Use a randomly generated token signing key; never use a tutorial example secret in production.
 - Keep persistent Postgres volumes and backups intact.
 - For future releases, pull the latest image and run `docker compose up -d --no-deps semesterprojekt-api`.
+  Watchtower deployment test - October 28, 2026
