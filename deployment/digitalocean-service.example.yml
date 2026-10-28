@@ -3,7 +3,7 @@
 # Docker Hub image published by .github/workflows/main.yml.
 
   semesterprojekt-api:
-    image: rav3n2594/hotel_api:latest
+    image: rav3n2594/coding-learning-platform:latest
     container_name: semesterprojekt-api
     restart: unless-stopped
     ports:
