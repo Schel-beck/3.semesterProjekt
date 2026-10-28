@@ -33,8 +33,8 @@ public class Main {
                 userQuestionRoutes,
                 notificationRoute
         );
-        //Importer importer = new Importer();
-        //importer.importIntoDatabase();
+        Importer importer = new Importer();
+        importer.importIntoDatabase();
 
 
         Javalin app = Javalin.create(config -> {

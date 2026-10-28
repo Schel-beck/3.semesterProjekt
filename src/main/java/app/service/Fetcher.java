@@ -106,7 +106,7 @@ public class Fetcher {
                     "{\n" +
                     "  \"questions\": [\n" +
                     "    {\n" +
-                    "      \"id\": \"1,\"\n" +
+                    "      \"id\": 1,\n" +
                     "      \"name\": \"question name\"\n" +
                     "    }\n" +
                     "  ]\n" +
@@ -165,16 +165,11 @@ public class Fetcher {
             Thread.currentThread().interrupt();
             throw new RuntimeException("Fetching was interrupted", e);
         } catch (ExecutionException e) {
-            throw new LLMException("Error fetching questions",true, e.getCause());
+            throw new LLMException("Error fetching questions", true, e.getCause());
         } finally {
             executorService.shutdown();
         }
 
         return subjectsWithQuestionsDTOS;
-    }
-
-
-    public static void main(String[] args) throws Exception {
-
     }
 }
