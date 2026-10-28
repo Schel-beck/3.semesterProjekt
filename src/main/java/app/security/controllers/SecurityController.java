@@ -91,10 +91,13 @@ public class SecurityController implements ISecurityController {
             try {
                 CreateUserDTO userInput = ctx.bodyAsClass(CreateUserDTO.class);
                 String error = validateUser(userInput.getUsername(), userInput.getEmail(), userInput.getPassword());
+
                 if (!error.isEmpty()) {
-                    ctx.attribute("msg", error);
-                    throw new RuntimeException(error);
-                } else {
+                    ctx.status(400).json(
+                            returnObject.put("msg", error)
+                    );
+                    return;
+            } else {
                     User created = securityDAO.createUser(userInput);
                     UserDTO userDTO = new UserDTO(created.getUsername(), created.getPassWord());
 
@@ -105,9 +108,9 @@ public class SecurityController implements ISecurityController {
                 }
             } catch (EntityExistsException e) {
 
-                ctx.status(HttpStatus.UNPROCESSABLE_CONTENT);
-
-                ctx.json(returnObject.put("msg", "User already exists"));
+                ctx.status(409).json(
+                        returnObject.put("msg", "User already exists")
+                );
             } catch (Exception e) {
                 // Temporary debugging: print the actual error in IntelliJ
                 e.printStackTrace();
@@ -254,15 +257,17 @@ public class SecurityController implements ISecurityController {
      */
 
     public static String validateUser(String username, String email, String password) {
-        if (username.isEmpty()) {
+
+        if (username == null || username.isBlank()) {
             return "username skal udfyldes";
-        } else if (email.isEmpty()) {
+        } else if (email == null || email.isBlank()) {
             return "email skal udfyldes";
         } else if (!email.contains("@")) {
             return "email mangler @";
-        } else if (password.isEmpty()) {
+        } else if (password == null || password.isBlank()) {
             return "Password skal udfyldes";
-        } else if (password.length() < 8) {
+        }
+        else if (password.length() < 8) {
             return "password skal være mindst 8 tegn";
         } else if (!password.matches(".*\\d.*")) {
             return "password skal have mindst 1 tal";

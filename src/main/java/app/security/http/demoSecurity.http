@@ -3,9 +3,8 @@ POST {{url}}/auth/register
 Content-Type: application/json
 
 {
-  "email": "user@exmp3le.com",
-  "username": "RA3333+",
-  "password": "test12233¤"
+  "email": "missingusername@example.com",
+  "password": "Password123!"
 }
 ###
 POST {{url}}/auth/login/
