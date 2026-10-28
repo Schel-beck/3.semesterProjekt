@@ -54,10 +54,13 @@ public class SecurityController implements ISecurityController {
             try {
                 UserDTO userDTO = ctx.bodyAsClass(UserDTO.class);
                 User verifiedUser = securityDAO.getVerifiedUser(userDTO.getUsername(), userDTO.getPassword());
+
                 if (verifiedUser == null) {
                     ctx.status(401);
-                    ctx.json(returnObject.put("msg", "password does not match"));
+                    ctx.json(returnObject.put("msg", "Invalid username or password"));
+                    return;
                 }
+
                 UserDTO verifiedUserDto = new UserDTO(verifiedUser.getUsername(), verifiedUser.getPassWord());
                 String token = createToken(verifiedUserDto);
                 ctx.attribute("user", verifiedUserDto);

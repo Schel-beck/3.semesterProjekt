@@ -22,22 +22,26 @@ public class SecurityDAO {
     private EntityManagerFactory emf;
     private static final Logger log = LoggerFactory.getLogger(SecurityDAO.class);
 
-    public User getVerifiedUser(String username, String password) throws ValidationException {
-        EntityManager em = emf.createEntityManager();
 
-        User user = em.createQuery("SELECT p FROM User p WHERE p.username = :username",
-                        User.class)
-                .setParameter("username", username)
-                .getSingleResult();
+    public User getVerifiedUser(String username, String password) {
+        try (EntityManager em = emf.createEntityManager()) {
 
+            User user = em.createQuery(
+                            "SELECT p FROM User p WHERE p.username = :username",
+                            User.class)
+                    .setParameter("username", username)
+                    .getResultStream()
+                    .findFirst()
+                    .orElse(null);
 
-        if (!user.verifyPassword(password)) {
-            log.warn("password dosent match");
-            return null;
+            if (user == null || !user.verifyPassword(password)) {
+                return null;
+            }
+
+            return user;
         }
-        em.close();
-        return user;
     }
+
 
     public User createUser(CreateUserDTO createUserDTO) {
         EntityManager em = emf.createEntityManager();
