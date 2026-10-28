@@ -6,6 +6,9 @@ import app.persistence.QuestionDAO;
 import app.routes.*;
 import app.security.routes.SecurityRoutes;
 import io.javalin.Javalin;
+import io.javalin.json.JavalinJackson;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import jakarta.persistence.EntityManagerFactory;
 
@@ -30,8 +33,8 @@ public class ApplicationConfig {
                 new NotificationRoute(notificationController));
 
         Javalin app = Javalin.create(config -> {
+            config.jsonMapper(new JavalinJackson(new ObjectMapper().registerModule(new JavaTimeModule()), false));
             config.routes.apiBuilder(routes.getRoutes());
-            config.routes.apiBuilder(securityRoutes.getSecurityRoutes());
             config.bundledPlugins.enableRouteOverview("/routes");
         });
 

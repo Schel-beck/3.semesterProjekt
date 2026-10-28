@@ -53,8 +53,8 @@ class User_roleDAOTest {
 
         assertNotNull(actual);
         assertEquals(expected.getId(), actual.getId());
-        assertEquals(expected.getUser(), actual.getUser());
-        assertEquals(expected.getRole(), actual.getRole());
+        assertEquals(expected.getUser().getId(), actual.getUser().getId());
+        assertEquals(expected.getRole().getId(), actual.getRole().getId());
     }
 
     @Test

@@ -51,14 +51,18 @@ public class User_roleDAO implements IDAO<User_role, Integer>{
 
     @Override
     public void delete(Integer id) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        User_role obj = em.find(User_role.class, id);
-        if (obj != null) {
-            em.remove(obj);
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            try {
+                em.createQuery("DELETE FROM User_role e WHERE e.id = :id")
+                    .setParameter("id", id)
+                    .executeUpdate();
+                em.getTransaction().commit();
+            } catch (RuntimeException e) {
+                if (em.getTransaction().isActive()) em.getTransaction().rollback();
+                throw e;
+            }
         }
-        em.getTransaction().commit();
-        em.close();
     }
 
 }
