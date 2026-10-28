@@ -287,6 +287,16 @@ public class SecurityController implements ISecurityController {
                 // get the role from the body. the json is {"role": "manager"}.
                 // We need to get the role from the body and the username from the token
                 String newRole = ctx.bodyAsClass(ObjectNode.class).get("role").asText();
+
+                newRole = newRole.toUpperCase();
+
+                if (!newRole.equals("USER") && !newRole.equals("ADMIN")) {
+                    ctx.status(400).json(
+                            returnObject.put("msg", "Invalid role. Allowed roles: USER, ADMIN")
+                    );
+                    return;
+                }
+
                 UserDTO user = ctx.attribute("user");
 
                 if (user == null) {
@@ -296,6 +306,16 @@ public class SecurityController implements ISecurityController {
                     );
                     return;
                 }
+
+                if (!user.getRoles().stream()
+                        .anyMatch(role -> role.equalsIgnoreCase("ADMIN"))) {
+
+                    ctx.status(403).json(
+                            returnObject.put("msg", "Admin access required")
+                    );
+                    return;
+                }
+
                 User updatedUser = securityDAO.addRole(user, newRole);
                 ctx.status(200).json(returnObject.put("msg", "Role " + newRole + " added to user"));
             } catch (EntityNotFoundException e) {

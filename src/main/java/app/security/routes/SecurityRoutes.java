@@ -28,7 +28,7 @@ public class SecurityRoutes {
                 post("/login", securityController.login(), Role.ANYONE);
                 post("/register", securityController.register(), Role.ANYONE);
                 before("/user/addrole", securityController.authenticate());
-                post("/user/addrole", securityController.addRole(), Role.USER);
+                post("/user/addrole", securityController.addRole(), Role.ADMIN);
             });
         };
     }
