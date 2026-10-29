@@ -104,7 +104,8 @@ GitHub Actions is used to build and publish the Docker image, and HTTPS is confi
 
 ## ERD
 
-[Insert your Entity Relationship Diagram here.]
+<img width="1205" height="1106" alt="Untitled" src="https://github.com/user-attachments/assets/bb371d52-f254-4e00-b001-74a666c5661b" />
+
 
 ## Important Entities
 
@@ -254,14 +255,13 @@ The chat endpoint communicates with an external AI service to support programmin
 
 # User Stories
 
-These user stories were written retrospectively to describe the functionality and intended use of the project.
+These user stories were written to describe the functionality and intended use of the project.
 
 - As a visitor, I want to register an account so I can use the learning platform.
 - As a registered user, I want to log in securely so I can access authenticated functionality.
 - As a learner, I want to browse programming subjects so I can choose what to study.
 - As a learner, I want to view questions associated with a subject so I can practice programming concepts.
 - As a learner, I want to use AI chat assistance so I can ask questions about programming topics.
-- As an administrator, I want to manage learning content so the platform can be maintained. (Intended functionality)
 
 ---
 
