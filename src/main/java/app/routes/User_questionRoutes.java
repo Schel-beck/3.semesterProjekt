@@ -11,7 +11,12 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 import static io.javalin.apibuilder.ApiBuilder.delete;
 
 public class User_questionRoutes {
+
     private final User_questionController controller;
+
+    public User_questionRoutes() {
+        this(HibernateConfig.getEntityManagerFactory());
+    }
 
     public User_questionRoutes(EntityManagerFactory emf) {
         this.controller = new User_questionController(emf);

@@ -144,7 +144,14 @@ public class SecurityDAO {
         try {
             em.getTransaction().begin();
 
-            User user = em.find(User.class, username);
+            User user = em.createQuery(
+                            "SELECT u FROM User u WHERE u.username = :username",
+                            User.class
+                    )
+                    .setParameter("username", username)
+                    .getResultStream()
+                    .findFirst()
+                    .orElse(null);
 
             if (user == null) {
                 throw new EntityNotFoundException(
