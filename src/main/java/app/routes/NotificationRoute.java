@@ -1,6 +1,7 @@
 package app.routes;
 
 import app.controllers.NotificationController;
+import app.security.enums.Role;
 import io.javalin.apibuilder.EndpointGroup;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
@@ -15,7 +16,7 @@ public class NotificationRoute {
     protected EndpointGroup getRoutes() {
 
         return () -> {
-            ws("notification", notificationController::handleNotification);
+            ws("notification", notificationController::handleNotification, Role.ANYONE);
         };
     }
 }

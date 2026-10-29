@@ -1,6 +1,7 @@
 package app.routes;
 
 import app.controllers.QuestionController;
+import app.security.enums.Role;
 import io.javalin.apibuilder.EndpointGroup;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -14,11 +15,11 @@ public class QuestionRoute {
     protected EndpointGroup getRoutes() {
 
         return () -> {
-            post("/subjects/{id}/questions", questionController::create);
-            get("/questions", questionController::readAll);
-            get("/questions/{id}", questionController::read);
-            put("/questions/{id}", questionController::update);
-            delete("/questions/{id}", questionController::delete);
+            post("/subjects/{id}/questions", questionController::create,Role.ADMIN);
+            get("/questions", questionController::readAll, Role.ANYONE);
+            get("/questions/{id}", questionController::read,Role.ANYONE);
+            put("/questions/{id}", questionController::update,Role.ADMIN);
+            delete("/questions/{id}", questionController::delete,Role.ADMIN);
         };
     }
 

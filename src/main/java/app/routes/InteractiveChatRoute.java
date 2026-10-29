@@ -1,6 +1,7 @@
 package app.routes;
 
 import app.controllers.InteractiveChatController;
+import app.security.enums.Role;
 import app.service.InteractiveChat;
 import io.javalin.apibuilder.EndpointGroup;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class InteractiveChatRoute {
     protected EndpointGroup getRoutes() {
 
         return () -> {
-            post("/chat", chatController::chat);
+            post("/chat", chatController::chat, Role.ANYONE);
         };
     }
 
