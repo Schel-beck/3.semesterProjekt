@@ -33,12 +33,11 @@ public class User_questionController
     /**
      * Constructs a User_questionController and initializes its DAOs.
      *
-     * @param emf the EntityManagerFactory used for database operations
      */
-    public User_questionController(EntityManagerFactory emf) {
-        this.dao = new User_questionDAO(emf);
-        this.userDAO = new UserDAO(emf);
-        this.questionDAO = new QuestionDAO(emf);
+    public User_questionController(UserDAO userDAO, QuestionDAO questionDAO, User_questionDAO dao) {
+        this.dao = dao;
+        this.userDAO = userDAO;
+        this.questionDAO = questionDAO;
     }
 
     /**

@@ -20,15 +20,13 @@ import java.util.List;
  */
 public class QuestionController implements IController<QuestionDTO, Integer> {
 
-    EntityManagerFactory emf;
     private QuestionDAO dao;
     private SubjectDAO subjectDAO;
     private static final Logger log = LoggerFactory.getLogger(QuestionController.class);
 
-    public QuestionController(EntityManagerFactory emf) {
-        this.emf = emf;
-        this.subjectDAO = new SubjectDAO(emf);
-        this.dao = new QuestionDAO(emf);
+    public QuestionController(SubjectDAO subjectDAO, QuestionDAO questionDAO) {
+        this.subjectDAO = subjectDAO;
+        this.dao = questionDAO;
     }
 
     /**

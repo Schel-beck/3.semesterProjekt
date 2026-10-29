@@ -17,8 +17,8 @@ public class SecurityRoutes {
     private static ObjectMapper jsonMapper = new ObjectMapper();
     private final SecurityController securityController;
 
-    public SecurityRoutes(EntityManagerFactory emf) {
-        this.securityController = new SecurityController(emf);
+    public SecurityRoutes(SecurityController securityController) {
+        this.securityController = securityController;
     }
     public  EndpointGroup getSecurityRoutes() {
         return ()->{

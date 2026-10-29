@@ -18,9 +18,11 @@ import java.util.List;
  */
 public class SubjectController implements IController<SubjectDTO, Integer> {
 
-    EntityManagerFactory emf;
     private SubjectDAO dao;
     private static final Logger log = LoggerFactory.getLogger(SubjectController.class);
+    public SubjectController(SubjectDAO subjectDAO) {
+        this.dao = subjectDAO;
+    }
 
     /**
      * Retrieves a subject by its ID and returns it as JSON.
@@ -185,8 +187,5 @@ public class SubjectController implements IController<SubjectDTO, Integer> {
         return dto;
     }
 
-    public SubjectController(EntityManagerFactory emf) {
-        this.emf = emf;
-        this.dao = new SubjectDAO(emf);
-    }
+
 }
