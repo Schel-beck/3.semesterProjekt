@@ -309,3 +309,7 @@ mvn test
 The project includes integration tests for backend functionality.
 
 Additional HTTP requests can be found in `src/test/dev.http`.
+
+## Demo
+
+[ Se videoen](video/21.09.2026_14.03.44_REC.mp4)
