@@ -70,7 +70,7 @@ PostgreSQL
 
 ### Project Structure
 
-I separated routes, controllers, services, and database access into different classes to make the project easier to understand, maintain, and test.
+I separated routes, controllers, services, security and database access into different classes to make the project easier to understand, maintain, and test.
 
 ### Database
 
@@ -257,11 +257,11 @@ The chat endpoint communicates with an external AI service to support programmin
 
 These user stories were written to describe the functionality and intended use of the project.
 
-- As a visitor, I want to register an account so I can use the learning platform.
+- As a user, I want to register an account so I can use the learning platform.
 - As a registered user, I want to log in securely so I can access authenticated functionality.
-- As a learner, I want to browse programming subjects so I can choose what to study.
-- As a learner, I want to view questions associated with a subject so I can practice programming concepts.
-- As a learner, I want to use AI chat assistance so I can ask questions about programming topics.
+- As a user, I want to browse programming subjects so I can choose what to study.
+- As a user, I want to view questions associated with a subject so I can practice programming concepts.
+- As a user, I want to use AI chat assistance so I can ask questions about programming topics.
 
 ---
 
